@@ -5,18 +5,15 @@ const port = process.env.PORT || 3000;
 const logger = require('morgan');
 const { sequelize } = require('./database/models');
 
-// table creation 
-// require('./database/models/User')
-
 
 
 
 // APIS
 const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
-// const charactersRouter = require('./routes/characters.routes');
-// const genresRouter = require('./routes/genres.routes');
-// const seriesAndMoviesRouter = require('./routes/genres.routes');
+const charactersRouter = require('./routes/characters.routes');
+const genresRouter = require('./routes/genres.routes');
+const moviesRouter = require('./routes/movies.routes');
 
 
 // Middlewares
@@ -28,9 +25,9 @@ app.use(express.json());
 // Routes
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-// app.use('/characters', charactersRouter);
-// app.use('/genres', genresRouter);
-// app.use('/series-and-movies', seriesAndMoviesRouter);
+app.use('/characters', charactersRouter);
+app.use('/genres', genresRouter);
+app.use('/movies', moviesRouter);
 
 
 // catch 404 and forward to error handler
@@ -57,11 +54,14 @@ async function main() {
 
   try {
 
-      // await sequelize.sync({ alter: true});
-
       app.listen(port, () => {
           console.log('Server is listening on port', port);
       });
+
+      /*  table creation  */
+      //await sequelize.sync();
+      //await sequelize.sync({ alter: true });
+      //await sequelize.sync({ force: true })
 
       await sequelize.authenticate();
       console.log('DB connected 🚀🚀');
@@ -72,6 +72,7 @@ async function main() {
 }
 
 main()
+
 
 
 
