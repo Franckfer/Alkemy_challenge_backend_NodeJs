@@ -1,20 +1,22 @@
-const { Character, CharacterMovie } = require('../database/models');
+const { Movie, CharacterMovie } = require('../database/models');
 const { Op } = require('sequelize');
 const getUrl = (req) => req.protocol + '://' + req.get('host') + req.originalUrl;
 
+
+
 module.exports = {
 
-    getCharacterList: async (req, res) => {
-        
-        const characters = await Character.findAll({
-            attributes: ['image', 'name']
+    getAllMovies: async (req, res) => {
+
+        const movies = await Movie.findAll({
+            attributes: ['image', 'title', 'creation_date']
         });
 
 
-        if (characters.length === 0) {
+        if (movies.length === 0) {
             return res.status(404).json({
                 success : false,
-                message : 'Characters not found'
+                message : 'Movies or series not found'
             });
         }
         
@@ -22,28 +24,29 @@ module.exports = {
             meta: {
                 success: true,
                 url: getUrl(req),
-                total_characters: characters.length,
+                total_movies: movies.length,
             },
-            data: characters
+            data: movies
         })
+        
     },
-    getCharacter: async (req, res) => {
+    getMovie: async (req, res) => {
         
         const { id } = req.params;
                     
         try {
 
-            const character = await Character.findByPk(id, {
+            const movie = await Movie.findByPk(id, {
                 include: [
-                    { association: 'movies', attributes: ["title"] },
+                    { association: 'characters', attributes: ["name"] }, 
+                    { association: 'genres', attributes: ["name"] }
                 ]
             });
 
-            
-            if (!character || character === null) {
+            if (!movie) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Character not exist or wrong id',
+                    message: 'Movie/serie does not exist or wrong id',
                 });
             };
 
@@ -51,9 +54,9 @@ module.exports = {
                 meta:{
                     success: true,
                     url: getUrl(req),
-                    message: 'Character found successfully'
+                    message: 'Successfully found movie or series'
                 },
-                data: character
+                data: movie
             });
 
         } catch (error) {
@@ -66,47 +69,30 @@ module.exports = {
             });
 
         }
+        
     },
-    newCharacter: async (req, res) => {
+    newMovie: async (req, res) => {
+        
+        const { image, title, rating, genre_id } = req.body;
 
-        const { image, name, age, weight, story, movie_id } = req.body;
-               
         try {
             
-            const arrayMovies = [];
-        
-            if (movie_id instanceof Array) {
-                movie_id.forEach(id => {
-                    arrayMovies.push(id)
-                });
-            } else {
-                arrayMovies.push(movie_id)
-            }
-
-            const newCharacter = await Character.create({
-                image, 
-                name, 
-                age, 
-                weight, 
-                story 
+            const newMovie = await Movie.create({
+                image,
+                title,
+                creation_date: new Date(),
+                rating,
+                genre_id
             });
 
-            if (newCharacter) {
-                arrayMovies.forEach(movie => {
-                    CharacterMovie.create({
-                        character_id: newCharacter.id,
-                        movie_id: movie
-                    })
-                })
-            }
-
+            //console.log(newMovie);
             return res.status(201).json({
                 meta:{
                     success: true,
                     url: getUrl(req),
-                    message: 'Character successfully added'
+                    message: 'Successfully added movie or series'
                 },
-                data: newCharacter
+                data: newMovie
             });
 
         } catch (error) {
@@ -120,38 +106,37 @@ module.exports = {
         }
 
     },
-    editCharacter: async (req, res) => {
-        
+    editMovie: async (req, res) => {
+
         const { id } = req.params;
-        const { image, name, age, weight, story, movie_id } = req.body;
+        const { image, title, creation_date, rating, genre_id } = req.body;
 
         try {
+            
+            const movie = await Movie.findByPk(id)
 
-            const character = await Character.findByPk(id)
-
-            if (!character) {
+            if (!movie) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Character does not exist or wrong id',
+                    message: 'Movie/serie does not exist or wrong id',
                 });
             };
 
-            
-            await character.update({
+            await Movie.update({
                 image, 
-                name, 
-                age,
-                weight, 
-                story,
-                
+                title, 
+                creation_date,
+                rating, 
+                genre_id,
             }, { where: { id } });
-        
+
+
             return res.status(200).json({
                 success: true,
                 url: getUrl(req),
-                message: 'Successfully updated character' 
+                message: 'successfully updated movie/serie' 
             })
-
+            
         } catch (error) {
             
             console.log(error);
@@ -160,21 +145,21 @@ module.exports = {
                 message : 'Contact the site administrator',
             });
         }
-            
+
     },
-    removeCharacter: async (req, res) => {
+    removeMovie: async (req, res) => {
 
         const { id } = req.params;
 
         try {
 
-            await CharacterMovie.destroy({where: { character_id: id }});
-            const deleteCharacter = await Character.destroy({where: { id }});             
+            await CharacterMovie.destroy({where: { movie_id: id }});
+            const deletedMovie = await Movie.destroy({where: { id }});
 
-            if (!deleteCharacter) {
+            if (!deletedMovie) {
                 return res.status(404).json({
                     success: false,
-                    message: 'Character does not exist or wrong id',
+                    message: 'Movie/serie does not exist or wrong id',
                 });
             }
 
@@ -196,41 +181,39 @@ module.exports = {
         }
 
     },
-    searchCharacters: async (req, res) => {
+    searchMovies: async (req, res) => {
 
-        const { name, age, weight, order = "DESC" } = req.query;
+        const { title, genre, order = "DESC" } = req.query;
 
-        if(name) name.toLowerCase().trim();
-        if(age) age.toLowerCase().trim();
-        if(weight) weight.toLowerCase().trim();
+        if(title) title.toLowerCase().trim();
+        if(genre) genre.trim();
         
         try {
             
-            if(name === '' || age === '') {
+            if(title === '' || genre === '') {
                 return res.status(404).json({
                     success : false,
-                    message : 'You must pass a query parameter'
+                    message : 'You must pass a title or genre as a query parameter'
                 });
             } 
 
-            const findCharacter = await Character.findAll({
+            const findMovie = await Movie.findAll({
                 where: {
                     [Op.or]: [
-                        { name: { [Op.like]: `%${name}%` } },
-                        { age: { [Op.like]: `%${age}%` } },
-                        { weight: { [Op.like]: `%${weight}%` } }
+                        { title: { [Op.like]: `%${title}%` } },
+                        { genre_id: { [Op.like]: `%${genre}%` } }
                     ]
                 },
                 include: [
-                    { association: 'movies', attributes: ["title"] }
+                    { association: 'genres', attributes: ["name"] }
                 ],
-                order: [["name", order]],
+                order: [["creation_date", order]],
             });
 
-            if (findCharacter.length === 0) {
+            if (findMovie.length === 0) {
                 return res.status(404).json({
                     success : false,
-                    message : 'Character not found'
+                    message : 'Movies/series or genre not found'
                 });
             }
             
@@ -238,9 +221,9 @@ module.exports = {
                 meta: {
                     success: true,
                     url: getUrl(req),
-                    total_movies: findCharacter.length,
+                    total_movies: findMovie.length,
                 },
-                data: findCharacter
+                data: findMovie
             });
 
         } catch (error) {
@@ -252,8 +235,8 @@ module.exports = {
                 error
             });
 
-        }
-
-    },
+        }       
+        
+    }
     
 }

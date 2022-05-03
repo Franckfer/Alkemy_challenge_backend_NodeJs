@@ -11,6 +11,9 @@ const {
 
 /*   /characters   */
 router
+    .get('/search', searchCharacters)  
+//   search characters
+
     .get('/', getCharacterList)  
 //   get all characters  
 
@@ -26,8 +29,7 @@ router
     .delete('/delete/:id', removeCharacter)  
 //   delete a character
 
-    .get('/search', searchCharacters)  
-//   search characters
+    
 
 
     

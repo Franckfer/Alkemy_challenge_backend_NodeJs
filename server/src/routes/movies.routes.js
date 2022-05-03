@@ -1,26 +1,37 @@
 const router = require('express').Router();
+const { 
+    getAllMovies, 
+    getMovie, 
+    newMovie, 
+    editMovie, 
+    removeMovie, 
+    searchMovies 
+} = require('../controllers/moviesController'); // require controllers
+
+
 
 
 /*   /movies   */
 router
-    .get('/', )  
-//   get all characters  
+    .get('/search', searchMovies)  
+//   search series or movies
 
-    .get('/:id', )  
-//   get character details  
+    .get('/', getAllMovies)  
+//   get all series and movies  
 
-    .post('/new', )  
-//   create a new character  
+    .get('/:id', getMovie)  
+//   get details movie or serie
 
-    .put('/edit/:id', ) 
-//   edit a character
+    .post('/new', newMovie)  
+//   create a new movie  
 
-    .delete('/delete/:id', )  
-//   delete a character
+    .put('/edit/:id', editMovie) 
+//   edit a movie
 
-    .get('/search')  
-//   search character
+    .delete('/delete/:id', removeMovie)  
+//   delete a movie
 
+   
 
     
 module.exports = router;

@@ -7,7 +7,6 @@ const { sequelize } = require('./database/models');
 
 
 
-
 // APIS
 const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
@@ -43,9 +42,9 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // send the error 
-  res.status(err.status || 500).json({
+  res.status(err.status || 404).json({
     success: false,
-    message: err.message
+    message: '404 not found'
   });
 });
 
@@ -69,9 +68,10 @@ async function main() {
   } catch (error) {
       console.error('Unable to connect to the database', error);
   }
+
 }
 
-main()
+main();
 
 
 

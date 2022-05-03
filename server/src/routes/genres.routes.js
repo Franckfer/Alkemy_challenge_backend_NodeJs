@@ -3,8 +3,7 @@ const {
     getAllGenres, 
     genreDetail, 
     newGenre, 
-    editGenre, 
-    removeGenre 
+    editGenre
 } = require('../controllers/genresController'); // require controllers
 
 
@@ -20,11 +19,9 @@ router
     .post('/new', newGenre)  
 //   create a new genre  
 
-    .put('/:id/edit', editGenre) 
+    .put('/edit/:id', editGenre) 
 //   edit a genre
 
-    .delete('/delete/:id', removeGenre)  
-//   delete a genre
 
 
     
