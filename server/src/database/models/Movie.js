@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         rating: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: false
         },
         genre_id: {
             type: DataTypes.INTEGER,

@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "37bce3cc-d224-45f5-9c1f-2f0ad6e97bde",
+		"name": "Documentation Disney Backend - Alkemy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth - User Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test_api\",\r\n    \"email\": \"test_api@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "### This route creates a new user\n\n###### *example:*\n\n##### **{**\n\n##### **\"name\": \"name\",**\n\n##### **\"email\": \"**[**name@mail.com**](mailto:name@mail.com)**\",**\n\n##### **\"password\": \"pass_123\"**\n\n##### **}**"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test_api@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "## This route logs in a user.\n\n###### *example:*\n\n##### **{**\n\n##### **\"email\": \"**[**name@mail.com**](mailto:name@mail.com)**\",**\n\n##### **\"password\": \"pass_123\"**\n\n##### **}**"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - All Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies"
+					]
+				},
+				"description": "## This route gets all the movies when a user is logged in"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - Details Movie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies/66",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"66"
+					]
+				},
+				"description": "## This route gets the detail of a movie\n\n###### *example:*\n\n#### [http://localhost:${port}/movies/${id}](http://localhost:${port}/movies/${id})"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - Search Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies/search?title=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "test"
+						}
+					]
+				},
+				"description": "## This route allows you to search for movies\n\n###### *example:*\n\n#### [http://localhost:5000/movies/search?title=test](http://localhost:5000/movies/search?title=test&genre=2&order=ASC)\n\n#### [http://localhost:5000/movies/search?genre=2](http://localhost:5000/movies/search?genre=2)\n\n#### [http://localhost:5000/movies/search?title=test&genre=2&order=ASC](http://localhost:5000/movies/search?title=test&genre=2&order=ASC)"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - Create New Movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image\": \"image\",\r\n    \"title\": \"test_movie\",\r\n    \"rating\": \"5\",\r\n    \"genre_id\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"new"
+					]
+				},
+				"description": "## This route create a new movie\n\n###### *example:*\n\n##### **{**\n\n##### **\"image\": \"**[**i**](mailto:name@mail.com)**mage.img\",**\n\n##### **\"title\": \"new_movie\",**\n\n##### \"rating\": 3,\n\n##### \"genre_id\": 2\n\n##### **}**"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - Edit Movie",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image\": \"edit image\",\r\n    \"title\": \"edit movie\",\r\n    \"creation_date\": \"2022-06-25\",\r\n    \"rating\": \"1\",\r\n    \"genre_id\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies/edit/66",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"edit",
+						"66"
+					]
+				},
+				"description": "## This route allows to edit a movie\n\n###### *example:*\n\n#### [http://localhost:${port}/movies/edit/${id}](http://localhost:${port}/movies/${id})\n\n##### {\n\n#####     \"image\": \"edit image\",\n\n#####     \"title\": \"edit movie\",\n\n#####     \"creation_date\": \"2022-06-25\",\n\n#####     \"rating\": \"1\",\n\n#####     \"genre_id\": \"2\"\n\n##### }"
+			},
+			"response": []
+		},
+		{
+			"name": "Movies - Delete Movie",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/movies/delete/52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"delete",
+						"52"
+					]
+				},
+				"description": "## This route allows you to delete a movie\n\n###### *example:*\n\n#### [http://localhost:${port}/movies/delete/${id}](http://localhost:${port}/movies/${id})"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - All Characters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters"
+					]
+				},
+				"description": "## This route gets all the characters when a user is logged in"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Details Characters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters",
+						"15"
+					]
+				},
+				"description": "## This route gets the detail of a character\n\n###### *example:*\n\n#### [http://localhost:${port}/characters/${id}](http://localhost:${port}/movies/${id})"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Search Characters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters",
+						"search"
+					]
+				},
+				"description": "## This route allows you to search for characters\n\n###### *example:*\n\n#### [http://localhost:5000/characters/search?name=test](http://localhost:5000/characters/search?name=test)\n\n#### [http://localhost:5000/characters/search?age50](http://localhost:5000/characters/search?age50)\n\n#### [http://localhost:5000/characters/search?weight=100](http://localhost:5000/characters/search?weight=100)\n\n#### http://localhost:5000/characters/search?name=peter&age=25&weight=70kg"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Create New Character",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image\": \"character.img\",\r\n    \"name\": \"new character\",\r\n    \"age\": \"100 years\",\r\n    \"weight\": \"100kg\",\r\n    \"story\": \"this is the story of a new character\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters",
+						"new"
+					]
+				},
+				"description": "## This route create a new character\n\n###### *example:*\n\n##### {\n\n##### \"image\": \"image\",\n\n##### \"name\": \"character\",\n\n##### \"age\": \"1245\",\n\n##### \"weight\": \"12345kg\",\n\n##### \"story\": \"story\"\n\n##### }"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Edit Character",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image\": \"edit image\",\r\n    \"name\": \"edit character\",\r\n    \"age\": \"edit 10000 years\",\r\n    \"weight\": \"edit 10000kg\",\r\n    \"story\": \"edit story\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters/edit/35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters",
+						"edit",
+						"35"
+					]
+				},
+				"description": "## This route allows to edit a character\n\n###### *example:*\n\n#### [http://localhost:${port}/characters/edit/${id}](http://localhost:${port}/characters/edit/${})\n\n##### {\n\n##### \"image\": \"edit image\",\n\n##### \"name\": \"edit name\",\n\n##### \"age\": \"edit years\",\n\n##### \"weight\": \"edit kg\",\n\n##### \"story\": \"edit story\"\n\n##### }"
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Delete Character",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/characters/delete/36",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"characters",
+						"delete",
+						"36"
+					]
+				},
+				"description": "## This route allows you to delete a character\n\n###### *example:*\n\n#### [http://localhost:${port}/characters/delete/${id}](http://localhost:${port}/movies/${id})"
+			},
+			"response": []
+		},
+		{
+			"name": "Genres - All Genres",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/genres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"genres"
+					]
+				},
+				"description": "## This route gets all the genres when a user is logged in"
+			},
+			"response": []
+		},
+		{
+			"name": "Genres - Details Genre",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:5000/genres/details/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"genres",
+						"details",
+						"2"
+					]
+				},
+				"description": "## This route gets the detail of a genre\n\n###### *example:*\n\n#### [http://localhost:${port}/genres/details/${id}](http://localhost:${port}/movies/${id})"
+			},
+			"response": []
+		},
+		{
+			"name": "Genres - Create New Genre",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"new genre\",\r\n    \"image\": \"new genre_image\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/genres/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"genres",
+						"new"
+					]
+				},
+				"description": "## This route create a new genre\n\n###### *example:*\n\n##### {\n\n##### \"name\": \"genre\",\n\n##### \"image\": \"genre_image.img\",\n\n##### }"
+			},
+			"response": []
+		},
+		{
+			"name": "Genres - Edit Genre",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJ0ZXN0X2FwaSIsImlhdCI6MTY1MTg0NTk0OSwiZXhwIjoxNjUxODYwMzQ5fQ.Io5ejDRIbkG1G6RPWL6tih4lLxvuj8ie9Od-GrmW1QI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"edit genre\",\r\n    \"image\": \"edit image\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/genres/edit/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"genres",
+						"edit",
+						"8"
+					]
+				},
+				"description": "## This route allows to edit a genre\n\n###### *example:*\n\n#### [http://localhost:${port}/genres/edit/${id}](http://localhost:${port}/characters/edit/${})\n\n##### {\n\n##### \"image\": \"edit genre image\",\n\n##### \"name\": \"edit genre\"\n\n##### }"
+			},
+			"response": []
+		}
+	]
+}

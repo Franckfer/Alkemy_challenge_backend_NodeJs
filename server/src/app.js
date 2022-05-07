@@ -53,11 +53,9 @@ async function main() {
 
   try {
 
-      app.listen(port, () => {
-          console.log('Server is listening on port', port);
-      });
+      app.listen(port, () => console.log(`Server is listening on port: ${port}\n*********************************\nlink: http://localhost:${port}`));
 
-      /*  table creation  */
+      /*  creation table  */
       //await sequelize.sync();
       //await sequelize.sync({ alter: true });
       //await sequelize.sync({ force: true })

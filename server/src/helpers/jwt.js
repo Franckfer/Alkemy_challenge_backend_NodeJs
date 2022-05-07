@@ -12,7 +12,7 @@ const JWTGenerator = (id, name) => {
         jwt.sign(
             payload, 
             process.env.SECRET_JWT || 'mycode', 
-            { expiresIn: '3h' },
+            { expiresIn: '4h' },
             (error, token) => {
                 
                 if (error) {

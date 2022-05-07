@@ -206,7 +206,7 @@ module.exports = {
         
         try {
             
-            if(name === '' || age === '') {
+            if(name === '' || age === '' || weight === '') {
                 return res.status(404).json({
                     success : false,
                     message : 'You must pass a query parameter'
