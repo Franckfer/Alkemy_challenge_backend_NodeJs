@@ -11,7 +11,7 @@
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
-
+- [Sequelize](https://sequelize.org/)
 
 ---
 
@@ -61,13 +61,23 @@ SECRET_JWT=genius1
 
 <br>
 
-## Iniciar el Servidor con algunos de los sigueintes comandos 🚀🚀🚀:
+## Iniciar el Servidor con algunos de los siguientes comandos 🚀🚀🚀:
 
 ``` bash
 npm start
 ```
 ``` bash
 nodemon
+```
+
+---
+
+<br>
+
+## Test 🧪🧪🧪
+
+``` bash
+npm run test
 ```
 
 ---
